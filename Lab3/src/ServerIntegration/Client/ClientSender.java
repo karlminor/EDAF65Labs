@@ -1,4 +1,4 @@
-package ServerIntegration;
+package ServerIntegration.Client;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -21,6 +21,11 @@ public class ClientSender extends Thread{
                 try {
                     output.write(message + "\n");
                     output.flush();
+                    String[] msg = message.split(":");
+                    if(msg[0].equals("Q")){
+                        System.out.println("Exiting");
+                        System.exit(0);
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

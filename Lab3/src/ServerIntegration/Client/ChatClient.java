@@ -1,9 +1,7 @@
-package ServerIntegration;
+package ServerIntegration.Client;
 
 import java.io.*;
 import java.net.Socket;
-import java.nio.Buffer;
-import java.util.Scanner;
 
 public class ChatClient {
     static String host;
@@ -23,11 +21,8 @@ public class ChatClient {
             setupConnection(socket);
             new ClientSender(output).start();
             new ClientReceiver(input, socket).start();
-            while(true){
-
-            }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("No server available");
         }
     }
 

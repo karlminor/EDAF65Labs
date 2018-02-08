@@ -1,4 +1,4 @@
-package ServerIntegration;
+package ServerIntegration.Client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,13 +20,15 @@ public class ClientReceiver extends Thread{
                 try {
                     message = input.readLine();
                     if(message != null) {
-                        System.out.println(input.readLine());
+                        System.out.println(message);
                     }
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.out.println("Server shut down");
+                    System.exit(0);
                 }
+            } else {
+                System.exit(0);
             }
-            System.exit(0);
         }
     }
 }

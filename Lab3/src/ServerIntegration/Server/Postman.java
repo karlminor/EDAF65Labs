@@ -1,4 +1,8 @@
-package ServerIntegration;
+package ServerIntegration.Server;
+
+import ServerIntegration.Server.Mailbox;
+import ServerIntegration.Server.Participant;
+import ServerIntegration.Server.Participants;
 
 import java.io.IOException;
 
@@ -17,7 +21,9 @@ public class Postman extends Thread{
             try {
                 message = mailbox.withdraw();
                 for (Participant p : participants.retrieveParticipants()){
-                    p.echo(message);
+                    if (p.status()) {
+                        p.echo(message);
+                    }
                 }
             }
             catch (IOException e) {

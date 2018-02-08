@@ -1,4 +1,4 @@
-package ServerIntegration;
+package ServerIntegration.Server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -6,7 +6,6 @@ import java.net.Socket;
 
 public class ServerMain {
     int port = 30000;
-    int number = 0;
 
     public static void main(String[] args) {
         new ServerMain().run();
@@ -24,8 +23,13 @@ public class ServerMain {
 
             while(true) {
                 socket = ss.accept();
-                p = new Participant(socket, mailbox, number);
-                number++;
+                for(Participant participant : participants.retrieveParticipants()){
+                    if(!participant.status()){
+                        participants.remove(participant);
+                        participant.interrupt();
+                    }
+                }
+                p = new Participant(socket, mailbox, participants.size());
                 participants.add(p);
                 p.start();
             }

@@ -1,4 +1,6 @@
-package ServerIntegration;
+package ServerIntegration.Server;
+
+import ServerIntegration.Server.Participant;
 
 import java.util.Collection;
 import java.util.Vector;
@@ -21,4 +23,6 @@ public class Participants{
     public synchronized void remove(Participant p){
         participants.remove(p);
     }
+
+    public synchronized int size(){ return participants.size();}
 }

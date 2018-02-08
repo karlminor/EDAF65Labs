@@ -1,4 +1,4 @@
-package ServerIntegration;
+package ServerIntegration.Server;
 
 
 public class Mailbox{
