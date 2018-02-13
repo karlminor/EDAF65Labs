@@ -24,3 +24,9 @@ hs_err_pid*
 *.iml
 workspace.xml
 tasks.xml
+
+# Hidden folders
+.*
+
+# Exclude gitignore file
+!/.gitignore
