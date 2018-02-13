@@ -6,6 +6,7 @@ import java.net.Socket;
 
 public class ServerMain {
     int port = 30000;
+    int count = 0;
 
     public static void main(String[] args) {
         new ServerMain().run();
@@ -29,7 +30,8 @@ public class ServerMain {
                         participant.interrupt();
                     }
                 }
-                p = new Participant(socket, mailbox, participants.size());
+                p = new Participant(socket, mailbox, count);
+                count++;
                 participants.add(p);
                 p.start();
             }

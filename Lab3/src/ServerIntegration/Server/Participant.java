@@ -5,7 +5,7 @@ import ServerIntegration.Server.Mailbox;
 import java.io.*;
 import java.net.Socket;
 
-public class Participant extends Thread{
+public class Participant extends Thread {
     private Socket socket;
     private Mailbox mailbox;
     private BufferedReader input;
@@ -13,44 +13,44 @@ public class Participant extends Thread{
     private String name;
     private boolean status;
 
-    public Participant(Socket socket, Mailbox mailbox, int number){
+    public Participant(Socket socket, Mailbox mailbox, int number) {
         this.socket = socket;
         this.mailbox = mailbox;
         name = "User " + Integer.toString(number);
         status = true;
     }
 
-    public void run(){
+    public void run() {
         System.out.println(name + " has joined with address: " +
                 socket.getInetAddress());
         try {
             input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             output = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-            while(socket.isConnected()){
+            while (socket.isConnected()) {
                 handleConnection();
             }
             disconnect();
         } catch (IOException e) {
             System.out.println(name + " has left");
             status = false;
-        }
-        catch (InterruptedException e) {
+        } catch (InterruptedException e) {
             System.out.println(name + " has left");
             status = false;
         }
     }
 
-    public boolean status(){
+    public boolean status() {
         return status;
     }
 
-    public String name(){
+    public String name() {
         return name;
     }
 
 
     private void handleConnection() throws IOException, InterruptedException {
-            String message = input.readLine();
+        String message = input.readLine();
+        if (message != null) {
             String[] msg = message.split(":");
             System.out.println(message);
             switch (msg[0]) {
@@ -69,6 +69,7 @@ public class Participant extends Thread{
                     echo("Incorrect entry");
                     break;
             }
+        }
     }
 
     public void echo(String msg) throws IOException {
